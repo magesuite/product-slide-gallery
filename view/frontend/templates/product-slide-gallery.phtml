@@ -1,0 +1,148 @@
+<?php
+/**
+ * SlideGallery - custom product gallery template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View\Gallery
+ * @var $escaper \Magento\Framework\Escaper
+ */
+?>
+
+<?php
+$galleryImagesJson = $block->getGalleryImagesJson();
+$galleryImages = json_decode($galleryImagesJson);
+
+$imageWidth = $block->getImageAttribute('product_page_image_medium', 'width');
+$imageHeight = $block->getImageAttribute('product_page_image_medium', 'height');
+
+$imageFullWidth = $block->getImageAttribute('product_page_image_large', 'width');
+$imageFullHeight = $block->getImageAttribute('product_page_image_large', 'height');
+
+$imageSmallWidth = $block->getImageAttribute('product_page_image_small', 'width');
+$imageSmallHeight = $block->getImageAttribute('product_page_image_small', 'height');
+
+$imageTypeHelper = $this->helper('MageSuite\ThemeHelpers\Helper\ImageType');
+$imageMimeType = $imageTypeHelper->getMimeType($galleryImages[0]->img);
+
+$videoType = $block->getVar('video_slide/type',  'MageSuite_ProductSlideGallery');
+
+$loaderImage = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
+?>
+
+<div class="cs-slide-gallery" data-gallery-role="gallery-placeholder" data-image-params='{
+        "imageMimeType": "<?= /* @noEscape */ $imageMimeType; ?>",
+        "imageWidth": <?= /* @noEscape */ $imageWidth; ?>,
+        "imageHeight": <?= /* @noEscape */ $imageHeight; ?>,
+        "imageFullWidth": <?= /* @noEscape */ $imageFullWidth; ?>,
+        "imageFullHeight": <?= /* @noEscape */ $imageFullHeight; ?>,
+        "imageSmallWidth": <?= /* @noEscape */ $imageSmallWidth; ?>,
+        "imageSmallHeight": <?= /* @noEscape */ $imageSmallHeight; ?>,
+        "loaderImage": "<?= /* @noEscape */ $loaderImage; ?>",
+        "initialGalleryImages": <?= /* @noEscape */ $galleryImagesJson; ?>
+    }'>
+    <div class="cs-slide-gallery__wrapper">
+        <ul class="cs-slide-gallery__slides">
+            <?php $i = 1; foreach($galleryImages as $image): ?>
+                <?php if ($image->type === "video"): ?>
+                    <li class="cs-slide-gallery__slide cs-slide-gallery__slide--video">
+                        <div class="cs-slide-gallery__picture-wrapper">
+                            <picture class="cs-slide-gallery__picture cs-slide-gallery__picture--video">
+                                <div data-video-teaser='{"url": "<?= $escaper->escapeUrl($image->videoUrl) ?>","type": "<?= $escaper->escapeHtml($videoType) ?>"}'></div>
+                                <img
+                                    type="<?= $escaper->escapeHtmlAttr($imageMimeType) ?>"
+                                    src="<?= $escaper->escapeUrl($loaderImage) ?>"
+                                    data-src="<?= $escaper->escapeUrl($image->img) ?>"
+                                    width="<?= $escaper->escapeHtmlAttr($imageWidth) ?>"
+                                    height="<?= $escaper->escapeHtmlAttr($imageHeight) ?>"
+                                    alt="<?= $escaper->escapeHtmlAttr($image->caption) ?>"
+                                    class="cs-slide-gallery__img lazyload"
+                                >
+                            </picture>
+                        </div>
+                    </li>
+                <?php else: ?>
+                    <li class="cs-slide-gallery__slide">
+                        <div class="cs-slide-gallery__picture-wrapper">
+                            <?php if ($i < 2): ?>
+                                <picture class="cs-slide-gallery__picture cs-slide-gallery__picture--base">
+                                    <img
+                                        type="<?= $escaper->escapeHtmlAttr($imageMimeType) ?>"
+                                        src="<?= $escaper->escapeUrl($image->img) ?>"
+                                        width="<?= $escaper->escapeHtmlAttr($imageWidth) ?>"
+                                        height="<?= $escaper->escapeHtmlAttr($imageHeight) ?>"
+                                        alt="<?= $escaper->escapeHtmlAttr($image->caption) ?>"
+                                        class="cs-slide-gallery__img"
+                                    >
+                                </picture>
+                            <?php else: ?>
+                                <picture class="cs-slide-gallery__picture cs-slide-gallery__picture--base">
+                                    <img
+                                        type="<?= $escaper->escapeHtmlAttr($imageMimeType) ?>"
+                                        src="<?= $escaper->escapeUrl($loaderImage) ?>"
+                                        data-src="<?= $escaper->escapeUrl($image->img) ?>"
+                                        width="<?= $escaper->escapeHtmlAttr($imageWidth) ?>"
+                                        height="<?= $escaper->escapeHtmlAttr($imageHeight) ?>"
+                                        alt="<?= $escaper->escapeHtmlAttr($image->caption) ?>"
+                                        class="cs-slide-gallery__img lazyload"
+                                    >
+                                </picture>
+                            <?php endif; ?>
+
+                            <picture class="cs-slide-gallery__picture cs-slide-gallery__picture--full">
+                            <img
+                                type="<?= $escaper->escapeHtmlAttr($imageMimeType) ?>"
+                                data-src="<?= $escaper->escapeUrl($image->full) ?>"
+                                width="<?= $escaper->escapeHtmlAttr($imageFullWidth) ?>"
+                                height="<?= $escaper->escapeHtmlAttr($imageFullHeight) ?>"
+                                alt="<?= $escaper->escapeHtmlAttr($image->caption) ?>"
+                                class="cs-slide-gallery__img"
+                            >
+                        </picture>
+                        </div>
+                    </li>
+                <?php endif; ?>
+            <?php $i++; endforeach ?>
+        </ul>
+
+        <div class="cs-slide-gallery__actions">
+            <button class="cs-slide-gallery__close" type="button" aria-label="<?= $escaper->escapeHtml(__('Close')) ?>"></button>
+            <button class="cs-slide-gallery__zoom" type="button" aria-label="<?= $escaper->escapeHtml(__('Zoom')) ?>"></button>
+            <button class="cs-slide-gallery__unzoom" type="button" aria-label="<?= $escaper->escapeHtml(__('Unzoom')) ?>"></button>
+        </div>
+
+        <button class="cs-slide-gallery__nav cs-slide-gallery__nav--prev" type="button" aria-label="<?= $escaper->escapeHtml(__('Previous')) ?>">
+            <?= $this->getLayout()
+                ->createBlock('MageSuite\ThemeHelpers\Block\Icon')
+                ->setIconUrl('images/icons/fotorama/fotorama-arrow-prev.svg')
+                ->setCssClass("cs-slide-gallery__nav-icon")
+                ->setInlined(true)
+                ->setLazyLoaded(true)
+                ->toHtml();
+            ?>
+        </button>
+        <button class="cs-slide-gallery__nav cs-slide-gallery__nav--next" type="button" aria-label="<?= $escaper->escapeHtml(__('Next')) ?>">
+            <?= $this->getLayout()
+                ->createBlock('MageSuite\ThemeHelpers\Block\Icon')
+                ->setIconUrl('images/icons/fotorama/fotorama-arrow-next.svg')
+                ->setCssClass("cs-slide-gallery__nav-icon")
+                ->setInlined(true)
+                ->setLazyLoaded(true)
+                ->toHtml();
+            ?>
+        </button>
+
+        <div class="cs-slide-gallery__pagination-wrapper">
+            <ul class="cs-slide-gallery__pagination">
+                <?php foreach($galleryImages as $image): ?>
+                    <?php if ($image->type === "video"): ?>
+                        <li class="cs-slide-gallery__thumb cs-slide-gallery__thumb--video">
+                    <?php else: ?>
+                        <li class="cs-slide-gallery__thumb">
+                    <?php endif; ?>
+                            <img class="cs-slide-gallery__thumb-img" src="<?= $escaper->escapeUrl($image->thumb) ?>" width="<?= $escaper->escapeHtmlAttr($imageSmallWidth) ?>" height="<?= $escaper->escapeHtmlAttr($imageSmallHeight) ?>" alt="<?= $escaper->escapeHtmlAttr($image->caption) ?>" loading="lazy"/>
+                        </li>
+                <?php endforeach ?>
+            </ul>
+        </div>
+    </div>
+    <div class="load indicator" style="display: none;"></div>
+</div>

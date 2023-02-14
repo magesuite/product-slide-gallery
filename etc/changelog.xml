@@ -1,0 +1,14 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:MageSuite_Changelog:etc/changelog.xsd">
+    <module id="MageSuite_ProductSlideGallery" name="MageSuite_ProductSlideGallery">
+        <changelog>
+            <tag version="1.0.0" date="2023-01-31">
+                <entry>
+                    <type>FEATURE</type>
+                    <overview>Introduce MageSuite_ProductSlideGallery module</overview>
+                    <description>Add custom PDP, CSS based, gallery module</description>
+                </entry>
+            </tag>
+        </changelog>
+    </module>
+</config>

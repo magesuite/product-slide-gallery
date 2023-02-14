@@ -1,0 +1,17 @@
+{
+    "name": "creativestyle/magesuite-product-slide-gallery",
+    "homepage": "https://creativestyle.de",
+    "license": "OSL-3.0",
+    "type": "magento2-module",
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "MageSuite\\ProductSlideGallery\\": ""
+        }
+    },
+    "require": {
+        "creativestyle/magesuite-server-side-swatches": "^1.0.0"
+    }
+}
