@@ -9,6 +9,12 @@
                     <description>Add custom PDP, CSS based, gallery module</description>
                 </entry>
             </tag>
+            <tag version="1.0.1" date="2023-02-16">
+                <entry>
+                    <type>FEATURE</type>
+                    <overview>Add support for thumnails navigation</overview>
+                </entry>
+            </tag>
         </changelog>
     </module>
 </config>
