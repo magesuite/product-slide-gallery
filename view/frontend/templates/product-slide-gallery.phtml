@@ -142,6 +142,25 @@ $loaderImage = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
                         </li>
                 <?php endforeach ?>
             </ul>
+
+            <button class="cs-slide-gallery__thumb-nav cs-slide-gallery__thumb-nav--prev" type="button" aria-label="<?= __('Previous') ?>" disabled>
+                <?= $this->getLayout()
+                    ->createBlock('MageSuite\ThemeHelpers\Block\Icon')
+                    ->setIconUrl('images/icons/icon_arrow-left.svg')
+                    ->setCssClass("cs-slide-gallery__thumb-nav-icon")
+                    ->setInlined(true)
+                    ->toHtml();
+                ?>
+            </button>
+            <button class="cs-slide-gallery__thumb-nav cs-slide-gallery__thumb-nav--next" type="button" aria-label="<?= __('Next') ?>" disabled>
+                <?= $this->getLayout()
+                    ->createBlock('MageSuite\ThemeHelpers\Block\Icon')
+                    ->setIconUrl('images/icons/icon_arrow-right.svg')
+                    ->setCssClass("cs-slide-gallery__thumb-nav-icon")
+                    ->setInlined(true)
+                    ->toHtml();
+                ?>
+            </button>
         </div>
     </div>
     <div class="load indicator" style="display: none;"></div>
