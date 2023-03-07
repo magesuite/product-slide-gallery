@@ -15,6 +15,12 @@
                     <overview>Add support for thumnails navigation</overview>
                 </entry>
             </tag>
+            <tag version="1.0.2" date="2023-02-27">
+                <entry>
+                    <type>REFACTOR</type>
+                    <overview>Refactor product-slide-gallery template</overview>
+                </entry>
+            </tag>
         </changelog>
     </module>
 </config>
