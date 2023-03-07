@@ -20,10 +20,10 @@ $imageFullHeight = $block->getImageAttribute('product_page_image_large', 'height
 $imageSmallWidth = $block->getImageAttribute('product_page_image_small', 'width');
 $imageSmallHeight = $block->getImageAttribute('product_page_image_small', 'height');
 
-$imageTypeHelper = $this->helper('MageSuite\ThemeHelpers\Helper\ImageType');
+$imageTypeHelper = $this->helper(\MageSuite\ThemeHelpers\Helper\ImageType::class);
 $imageMimeType = $imageTypeHelper->getMimeType($galleryImages[0]->img);
 
-$videoType = $block->getVar('video_slide/type',  'MageSuite_ProductSlideGallery');
+$videoType = $block->getVar('video_slide/type', 'MageSuite_ProductSlideGallery');
 
 $loaderImage = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
 ?>
@@ -41,8 +41,8 @@ $loaderImage = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
     }'>
     <div class="cs-slide-gallery__wrapper">
         <ul class="cs-slide-gallery__slides">
-            <?php $i = 1; foreach($galleryImages as $image): ?>
-                <?php if ($image->type === "video"): ?>
+            <?php $i = 1; foreach ($galleryImages as $image) : ?>
+                <?php if ($image->type === "video") : ?>
                     <li class="cs-slide-gallery__slide cs-slide-gallery__slide--video">
                         <div class="cs-slide-gallery__picture-wrapper">
                             <picture class="cs-slide-gallery__picture cs-slide-gallery__picture--video">
@@ -59,10 +59,10 @@ $loaderImage = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
                             </picture>
                         </div>
                     </li>
-                <?php else: ?>
+                <?php else : ?>
                     <li class="cs-slide-gallery__slide">
                         <div class="cs-slide-gallery__picture-wrapper">
-                            <?php if ($i < 2): ?>
+                            <?php if ($i < 2) : ?>
                                 <picture class="cs-slide-gallery__picture cs-slide-gallery__picture--base">
                                     <img
                                         type="<?= $escaper->escapeHtmlAttr($imageMimeType) ?>"
@@ -73,7 +73,7 @@ $loaderImage = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
                                         class="cs-slide-gallery__img"
                                     >
                                 </picture>
-                            <?php else: ?>
+                            <?php else : ?>
                                 <picture class="cs-slide-gallery__picture cs-slide-gallery__picture--base">
                                     <img
                                         type="<?= $escaper->escapeHtmlAttr($imageMimeType) ?>"
@@ -110,8 +110,8 @@ $loaderImage = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
         </div>
 
         <button class="cs-slide-gallery__nav cs-slide-gallery__nav--prev" type="button" aria-label="<?= $escaper->escapeHtml(__('Previous')) ?>">
-            <?= $this->getLayout()
-                ->createBlock('MageSuite\ThemeHelpers\Block\Icon')
+            <?= $block->getLayout()
+                ->createBlock(\MageSuite\ThemeHelpers\Block\Icon::class)
                 ->setIconUrl('images/icons/fotorama/fotorama-arrow-prev.svg')
                 ->setCssClass("cs-slide-gallery__nav-icon")
                 ->setInlined(true)
@@ -120,8 +120,8 @@ $loaderImage = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
             ?>
         </button>
         <button class="cs-slide-gallery__nav cs-slide-gallery__nav--next" type="button" aria-label="<?= $escaper->escapeHtml(__('Next')) ?>">
-            <?= $this->getLayout()
-                ->createBlock('MageSuite\ThemeHelpers\Block\Icon')
+            <?= $block->getLayout()
+                ->createBlock(\MageSuite\ThemeHelpers\Block\Icon::class)
                 ->setIconUrl('images/icons/fotorama/fotorama-arrow-next.svg')
                 ->setCssClass("cs-slide-gallery__nav-icon")
                 ->setInlined(true)
@@ -132,10 +132,10 @@ $loaderImage = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
 
         <div class="cs-slide-gallery__pagination-wrapper">
             <ul class="cs-slide-gallery__pagination">
-                <?php foreach($galleryImages as $image): ?>
-                    <?php if ($image->type === "video"): ?>
+                <?php foreach ($galleryImages as $image) : ?>
+                    <?php if ($image->type === "video") : ?>
                         <li class="cs-slide-gallery__thumb cs-slide-gallery__thumb--video">
-                    <?php else: ?>
+                    <?php else : ?>
                         <li class="cs-slide-gallery__thumb">
                     <?php endif; ?>
                             <img class="cs-slide-gallery__thumb-img" src="<?= $escaper->escapeUrl($image->thumb) ?>" width="<?= $escaper->escapeHtmlAttr($imageSmallWidth) ?>" height="<?= $escaper->escapeHtmlAttr($imageSmallHeight) ?>" alt="<?= $escaper->escapeHtmlAttr($image->caption) ?>" loading="lazy"/>
@@ -143,18 +143,18 @@ $loaderImage = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
                 <?php endforeach ?>
             </ul>
 
-            <button class="cs-slide-gallery__thumb-nav cs-slide-gallery__thumb-nav--prev" type="button" aria-label="<?= __('Previous') ?>" disabled>
-                <?= $this->getLayout()
-                    ->createBlock('MageSuite\ThemeHelpers\Block\Icon')
+            <button class="cs-slide-gallery__thumb-nav cs-slide-gallery__thumb-nav--prev" type="button" aria-label="<?= $block->escapeHtmlAttr(__('Previous')) ?>" disabled>
+                <?= $block->getLayout()
+                    ->createBlock(\MageSuite\ThemeHelpers\Block\Icon::class)
                     ->setIconUrl('images/icons/icon_arrow-left.svg')
                     ->setCssClass("cs-slide-gallery__thumb-nav-icon")
                     ->setInlined(true)
                     ->toHtml();
                 ?>
             </button>
-            <button class="cs-slide-gallery__thumb-nav cs-slide-gallery__thumb-nav--next" type="button" aria-label="<?= __('Next') ?>" disabled>
-                <?= $this->getLayout()
-                    ->createBlock('MageSuite\ThemeHelpers\Block\Icon')
+            <button class="cs-slide-gallery__thumb-nav cs-slide-gallery__thumb-nav--next" type="button" aria-label="<?= $block->escapeHtmlAttr(__('Next')) ?>" disabled>
+                <?= $block->getLayout()
+                    ->createBlock(\MageSuite\ThemeHelpers\Block\Icon::class)
                     ->setIconUrl('images/icons/icon_arrow-right.svg')
                     ->setCssClass("cs-slide-gallery__thumb-nav-icon")
                     ->setInlined(true)
