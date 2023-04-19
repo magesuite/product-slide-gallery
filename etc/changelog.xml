@@ -21,6 +21,12 @@
                     <overview>Refactor product-slide-gallery template</overview>
                 </entry>
             </tag>
+            <tag version="1.0.3" date="2023-04-19">
+                <entry>
+                    <type>FIX</type>
+                    <overview>Issue with serialize GalleryImagesJson for products with special character in name</overview>
+                </entry>
+            </tag>
         </changelog>
     </module>
 </config>
