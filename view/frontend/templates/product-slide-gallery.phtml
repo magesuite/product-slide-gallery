@@ -37,7 +37,7 @@ $loaderImage = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
         "imageSmallWidth": <?= /* @noEscape */ $imageSmallWidth; ?>,
         "imageSmallHeight": <?= /* @noEscape */ $imageSmallHeight; ?>,
         "loaderImage": "<?= /* @noEscape */ $loaderImage; ?>",
-        "initialGalleryImages": <?= /* @noEscape */ $galleryImagesJson; ?>
+        "initialGalleryImages": <?= $escaper->escapeHtmlAttr($galleryImagesJson); ?>
     }'>
     <div class="cs-slide-gallery__wrapper">
         <ul class="cs-slide-gallery__slides">
