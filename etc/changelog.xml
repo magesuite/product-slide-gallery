@@ -27,6 +27,12 @@
                     <overview>Issue with serialize GalleryImagesJson for products with special character in name</overview>
                 </entry>
             </tag>
+            <tag version="1.0.4" date="2023-04-20">
+                <entry>
+                    <type>FIX</type>
+                    <overview>Remove unused fotorama video template including events causing an error to appear in the console</overview>
+                </entry>
+            </tag>
         </changelog>
     </module>
 </config>
