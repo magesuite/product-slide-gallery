@@ -33,6 +33,12 @@
                     <overview>Remove unused fotorama video template including events causing an error to appear in the console</overview>
                 </entry>
             </tag>
+            <tag version="1.0.5" date="2023-04-27">
+                <entry>
+                    <type>FIX</type>
+                    <overview>Remove escaper for loader image</overview>
+                </entry>
+            </tag>
         </changelog>
     </module>
 </config>
