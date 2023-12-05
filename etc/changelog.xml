@@ -39,6 +39,13 @@
                     <overview>Remove escaper for loader image</overview>
                 </entry>
             </tag>
+            <tag version="1.0.6" date="2023-12-05">
+                <entry>
+                    <type>FEAT</type>
+                    <overview>Add `fetchpriority` and `loading` attributes for first image on PDP gallery</overview>
+                    <ticket_id>NKD-3894</ticket_id>
+                </entry>
+            </tag>
         </changelog>
     </module>
 </config>
