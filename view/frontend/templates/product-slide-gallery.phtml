@@ -71,6 +71,8 @@ $loaderImage = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
                                         height="<?= $escaper->escapeHtmlAttr($imageHeight) ?>"
                                         alt="<?= $escaper->escapeHtmlAttr($image->caption) ?>"
                                         class="cs-slide-gallery__img"
+                                        fetchpriority="high"
+                                        loading="eager"
                                     >
                                 </picture>
                             <?php else : ?>
