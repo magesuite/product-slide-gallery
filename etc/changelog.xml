@@ -46,6 +46,13 @@
                     <ticket_id>NKD-3894</ticket_id>
                 </entry>
             </tag>
+            <tag version="1.0.7" date="2024-02-13">
+                <entry>
+                    <type>FEAT</type>
+                    <overview>Add item count in data attribute</overview>
+                    <ticket_id>HAAR-3985</ticket_id>
+                </entry>
+            </tag>
         </changelog>
     </module>
 </config>

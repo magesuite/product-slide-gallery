@@ -38,7 +38,7 @@ $loaderImage = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
         "imageSmallHeight": <?= /* @noEscape */ $imageSmallHeight; ?>,
         "loaderImage": "<?= /* @noEscape */ $loaderImage; ?>",
         "initialGalleryImages": <?= $escaper->escapeHtmlAttr($galleryImagesJson); ?>
-    }'>
+    }' data-item-count="<?= $escaper->escapeHtmlAttr(count($galleryImages)) ?>">
     <div class="cs-slide-gallery__wrapper">
         <ul class="cs-slide-gallery__slides">
             <?php $i = 1; foreach ($galleryImages as $image) : ?>
