@@ -21,7 +21,7 @@ $imageFullHeight = $block->getImageAttribute('product_page_image_large', 'height
 $imageSmallWidth = $block->getImageAttribute('product_page_image_small', 'width');
 $imageSmallHeight = $block->getImageAttribute('product_page_image_small', 'height');
 
-$imageTypeHelper = $block->helper(\MageSuite\ThemeHelpers\Helper\ImageType::class);
+$imageTypeHelper = $this->helper(\MageSuite\ThemeHelpers\Helper\ImageType::class);
 $imageMimeType = $imageTypeHelper->getMimeType($galleryImages[0]->img);
 
 $videoType = $block->getVar('video_slide/type', 'MageSuite_ProductSlideGallery');

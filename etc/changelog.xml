@@ -60,6 +60,13 @@
                     <ticket_id>EMT-249</ticket_id>
                 </entry>
             </tag>
+            <tag version="1.0.9" date="2024-05-07">
+                <entry>
+                    <type>FIX</type>
+                    <overview>Fix template helper declaration</overview>
+                    <ticket_id>EMT-249</ticket_id>
+                </entry>
+            </tag>
         </changelog>
     </module>
 </config>
