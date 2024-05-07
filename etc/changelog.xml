@@ -53,6 +53,13 @@
                     <ticket_id>HAAR-3985</ticket_id>
                 </entry>
             </tag>
+            <tag version="1.0.8" date="2024-05-06">
+                <entry>
+                    <type>FIX</type>
+                    <overview>Remove arrows if images count = 1</overview>
+                    <ticket_id>EMT-249</ticket_id>
+                </entry>
+            </tag>
         </changelog>
     </module>
 </config>

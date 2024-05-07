@@ -5,6 +5,7 @@
  * @var $block \Magento\Catalog\Block\Product\View\Gallery
  * @var $escaper \Magento\Framework\Escaper
  */
+// @codingStandardsIgnoreFile
 ?>
 
 <?php
@@ -20,7 +21,7 @@ $imageFullHeight = $block->getImageAttribute('product_page_image_large', 'height
 $imageSmallWidth = $block->getImageAttribute('product_page_image_small', 'width');
 $imageSmallHeight = $block->getImageAttribute('product_page_image_small', 'height');
 
-$imageTypeHelper = $this->helper(\MageSuite\ThemeHelpers\Helper\ImageType::class);
+$imageTypeHelper = $block->helper(\MageSuite\ThemeHelpers\Helper\ImageType::class);
 $imageMimeType = $imageTypeHelper->getMimeType($galleryImages[0]->img);
 
 $videoType = $block->getVar('video_slide/type', 'MageSuite_ProductSlideGallery');
@@ -110,7 +111,7 @@ $loaderImage = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
             <button class="cs-slide-gallery__zoom" type="button" aria-label="<?= $escaper->escapeHtml(__('Zoom')) ?>"></button>
             <button class="cs-slide-gallery__unzoom" type="button" aria-label="<?= $escaper->escapeHtml(__('Unzoom')) ?>"></button>
         </div>
-
+        <?php if (count($galleryImages) > 1) : ?>
         <button class="cs-slide-gallery__nav cs-slide-gallery__nav--prev" type="button" aria-label="<?= $escaper->escapeHtml(__('Previous')) ?>">
             <?= $block->getLayout()
                 ->createBlock(\MageSuite\ThemeHelpers\Block\Icon::class)
@@ -131,6 +132,7 @@ $loaderImage = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
                 ->toHtml();
             ?>
         </button>
+        <?php endif; ?>
 
         <div class="cs-slide-gallery__pagination-wrapper">
             <ul class="cs-slide-gallery__pagination">
