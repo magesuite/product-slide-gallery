@@ -47,7 +47,9 @@ $loaderImage = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
                     <li class="cs-slide-gallery__slide cs-slide-gallery__slide--video">
                         <div class="cs-slide-gallery__picture-wrapper">
                             <picture class="cs-slide-gallery__picture cs-slide-gallery__picture--video">
-                                <div data-video-teaser='{"url": "<?= $escaper->escapeUrl($image->videoUrl) ?>","type": "<?= $escaper->escapeHtml($videoType) ?>"}'></div>
+                                <div data-video-teaser='{"url": "<?= $escaper->escapeUrl($image->videoUrl) ?>","type": "<?= $escaper->escapeHtml($videoType) ?>"}'>
+                                    <?= /* @noEscape */ $block->getChildHtml("consent_info"); ?>
+                                </div>
                                 <img
                                     type="<?= $escaper->escapeHtmlAttr($imageMimeType) ?>"
                                     src="<?= /* @noEscape */ $loaderImage ?>"
