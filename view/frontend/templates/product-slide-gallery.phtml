@@ -115,24 +115,10 @@ $loaderImage = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
         </div>
         <?php if (count($galleryImages) > 1) : ?>
         <button class="cs-slide-gallery__nav cs-slide-gallery__nav--prev" type="button" aria-label="<?= $escaper->escapeHtml(__('Previous')) ?>">
-            <?= $block->getLayout()
-                ->createBlock(\MageSuite\ThemeHelpers\Block\Icon::class)
-                ->setIconUrl('images/icons/fotorama/fotorama-arrow-prev.svg')
-                ->setCssClass("cs-slide-gallery__nav-icon")
-                ->setInlined(true)
-                ->setLazyLoaded(true)
-                ->toHtml();
-            ?>
+            <?= $block->getChildHtml('slide.gallery.button.arrow.prev'); ?>
         </button>
         <button class="cs-slide-gallery__nav cs-slide-gallery__nav--next" type="button" aria-label="<?= $escaper->escapeHtml(__('Next')) ?>">
-            <?= $block->getLayout()
-                ->createBlock(\MageSuite\ThemeHelpers\Block\Icon::class)
-                ->setIconUrl('images/icons/fotorama/fotorama-arrow-next.svg')
-                ->setCssClass("cs-slide-gallery__nav-icon")
-                ->setInlined(true)
-                ->setLazyLoaded(true)
-                ->toHtml();
-            ?>
+            <?= $block->getChildHtml('slide.gallery.button.arrow.next'); ?>
         </button>
         <?php endif; ?>
 
@@ -150,22 +136,10 @@ $loaderImage = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
             </ul>
 
             <button class="cs-slide-gallery__thumb-nav cs-slide-gallery__thumb-nav--prev" type="button" aria-label="<?= $block->escapeHtmlAttr(__('Previous')) ?>" disabled>
-                <?= $block->getLayout()
-                    ->createBlock(\MageSuite\ThemeHelpers\Block\Icon::class)
-                    ->setIconUrl('images/icons/icon_arrow-left.svg')
-                    ->setCssClass("cs-slide-gallery__thumb-nav-icon")
-                    ->setInlined(true)
-                    ->toHtml();
-                ?>
+                <?= $block->getChildHtml('slide.gallery.thumb.button.arrow.prev'); ?>
             </button>
             <button class="cs-slide-gallery__thumb-nav cs-slide-gallery__thumb-nav--next" type="button" aria-label="<?= $block->escapeHtmlAttr(__('Next')) ?>" disabled>
-                <?= $block->getLayout()
-                    ->createBlock(\MageSuite\ThemeHelpers\Block\Icon::class)
-                    ->setIconUrl('images/icons/icon_arrow-right.svg')
-                    ->setCssClass("cs-slide-gallery__thumb-nav-icon")
-                    ->setInlined(true)
-                    ->toHtml();
-                ?>
+                <?= $block->getChildHtml('slide.gallery.thumb.button.arrow.next'); ?>
             </button>
         </div>
     </div>

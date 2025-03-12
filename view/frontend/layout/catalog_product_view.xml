@@ -4,7 +4,40 @@
         <remove src="mage/gallery/gallery.css"/>
     </head>
     <body>
-        <referenceBlock name="product.info.media.image" template="MageSuite_ProductSlideGallery::product-slide-gallery.phtml" />
+        <referenceBlock name="product.info.media.image" template="MageSuite_ProductSlideGallery::product-slide-gallery.phtml">
+            <block class="MageSuite\ThemeHelpers\Block\Icon" name="slide.gallery.button.arrow.prev">
+                <arguments>
+                    <argument name="icon_url" xsi:type="string">images/icons/fotorama/fotorama-arrow-prev.svg</argument>
+                    <argument name="css_class" xsi:type="string">cs-slide-gallery__nav-icon</argument>
+                    <argument name="inlined" xsi:type="boolean">true</argument>
+                    <argument name="lazy_loaded" xsi:type="boolean">true</argument>
+                </arguments>
+            </block>
+            <block class="MageSuite\ThemeHelpers\Block\Icon" name="slide.gallery.button.arrow.next">
+                <arguments>
+                    <argument name="icon_url" xsi:type="string">images/icons/fotorama/fotorama-arrow-next.svg</argument>
+                    <argument name="css_class" xsi:type="string">cs-slide-gallery__nav-icon</argument>
+                    <argument name="inlined" xsi:type="boolean">true</argument>
+                    <argument name="lazy_loaded" xsi:type="boolean">true</argument>
+                </arguments>
+            </block>
+            <block class="MageSuite\ThemeHelpers\Block\Icon" name="slide.gallery.thumb.button.arrow.prev">
+                <arguments>
+                    <argument name="icon_url" xsi:type="string">images/icons/icon_arrow-left.svg</argument>
+                    <argument name="css_class" xsi:type="string">cs-slide-gallery__thumb-nav-icon</argument>
+                    <argument name="inlined" xsi:type="boolean">true</argument>
+                    <argument name="lazy_loaded" xsi:type="boolean">true</argument>
+                </arguments>
+            </block>
+            <block class="MageSuite\ThemeHelpers\Block\Icon" name="slide.gallery.thumb.button.arrow.next">
+                <arguments>
+                    <argument name="icon_url" xsi:type="string">images/icons/icon_arrow-right.svg</argument>
+                    <argument name="css_class" xsi:type="string">cs-slide-gallery__thumb-nav-icon</argument>
+                    <argument name="inlined" xsi:type="boolean">true</argument>
+                    <argument name="lazy_loaded" xsi:type="boolean">true</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
         <referenceBlock name="product.info.media.video" remove="true" />
     </body>
 </page>
