@@ -21,16 +21,13 @@ $imageFullHeight = $block->getImageAttribute('product_page_image_large', 'height
 $imageSmallWidth = $block->getImageAttribute('product_page_image_small', 'width');
 $imageSmallHeight = $block->getImageAttribute('product_page_image_small', 'height');
 
-$imageTypeHelper = $this->helper(\MageSuite\ThemeHelpers\Helper\ImageType::class);
-$imageMimeType = $imageTypeHelper->getMimeType($galleryImages[0]->img);
-
 $videoType = $block->getVar('video_slide/type', 'MageSuite_ProductSlideGallery');
 
 $loaderImage = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
 ?>
 
 <div class="cs-slide-gallery" data-gallery-role="gallery-placeholder" data-image-params='{
-        "imageMimeType": "<?= /* @noEscape */ $imageMimeType; ?>",
+        "imageMimeType": "", <?= /* backwards compatibility, we don't need it anymore */ ?>
         "imageWidth": <?= /* @noEscape */ $imageWidth; ?>,
         "imageHeight": <?= /* @noEscape */ $imageHeight; ?>,
         "imageFullWidth": <?= /* @noEscape */ $imageFullWidth; ?>,
@@ -40,7 +37,9 @@ $loaderImage = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
         "loaderImage": "<?= /* @noEscape */ $loaderImage; ?>",
         "initialGalleryImages": <?= $escaper->escapeHtmlAttr($galleryImagesJson); ?>
     }' data-item-count="<?= $escaper->escapeHtmlAttr(count($galleryImages)) ?>">
+    <div data-role="focusable-start"></div>
     <div class="cs-slide-gallery__wrapper">
+        <div class="cs-slide-gallery__slides-wrapper" tabindex="0" role="button">
         <ul class="cs-slide-gallery__slides">
             <?php $i = 1; foreach ($galleryImages as $image) : ?>
                 <?php if ($image->type === "video") : ?>
@@ -51,7 +50,6 @@ $loaderImage = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
                                     <?= /* @noEscape */ $block->getChildHtml("consent_info"); ?>
                                 </div>
                                 <img
-                                    type="<?= $escaper->escapeHtmlAttr($imageMimeType) ?>"
                                     src="<?= /* @noEscape */ $loaderImage ?>"
                                     data-src="<?= $escaper->escapeUrl($image->img) ?>"
                                     width="<?= $escaper->escapeHtmlAttr($imageWidth) ?>"
@@ -68,7 +66,6 @@ $loaderImage = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
                             <?php if ($i < 2) : ?>
                                 <picture class="cs-slide-gallery__picture cs-slide-gallery__picture--base">
                                     <img
-                                        type="<?= $escaper->escapeHtmlAttr($imageMimeType) ?>"
                                         src="<?= $escaper->escapeUrl($image->img) ?>"
                                         width="<?= $escaper->escapeHtmlAttr($imageWidth) ?>"
                                         height="<?= $escaper->escapeHtmlAttr($imageHeight) ?>"
@@ -81,7 +78,6 @@ $loaderImage = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
                             <?php else : ?>
                                 <picture class="cs-slide-gallery__picture cs-slide-gallery__picture--base">
                                     <img
-                                        type="<?= $escaper->escapeHtmlAttr($imageMimeType) ?>"
                                         src="<?= /* @noEscape */ $loaderImage ?>"
                                         data-src="<?= $escaper->escapeUrl($image->img) ?>"
                                         width="<?= $escaper->escapeHtmlAttr($imageWidth) ?>"
@@ -94,7 +90,7 @@ $loaderImage = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
 
                             <picture class="cs-slide-gallery__picture cs-slide-gallery__picture--full">
                             <img
-                                type="<?= $escaper->escapeHtmlAttr($imageMimeType) ?>"
+                                src="<?= /* @noEscape */ $loaderImage ?>"
                                 data-src="<?= $escaper->escapeUrl($image->full) ?>"
                                 width="<?= $escaper->escapeHtmlAttr($imageFullWidth) ?>"
                                 height="<?= $escaper->escapeHtmlAttr($imageFullHeight) ?>"
@@ -107,6 +103,7 @@ $loaderImage = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
                 <?php endif; ?>
             <?php $i++; endforeach ?>
         </ul>
+        </div>
 
         <div class="cs-slide-gallery__actions">
             <button class="cs-slide-gallery__close" type="button" aria-label="<?= $escaper->escapeHtml(__('Close')) ?>"></button>
@@ -123,17 +120,17 @@ $loaderImage = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
         <?php endif; ?>
 
         <div class="cs-slide-gallery__pagination-wrapper">
-            <ul class="cs-slide-gallery__pagination">
+            <div class="cs-slide-gallery__pagination">
                 <?php foreach ($galleryImages as $image) : ?>
                     <?php if ($image->type === "video") : ?>
-                        <li class="cs-slide-gallery__thumb cs-slide-gallery__thumb--video">
+                        <div class="cs-slide-gallery__thumb cs-slide-gallery__thumb--video" tabindex="0" role="button">
                     <?php else : ?>
-                        <li class="cs-slide-gallery__thumb">
+                        <div class="cs-slide-gallery__thumb" tabindex="0" role="button">
                     <?php endif; ?>
                             <img class="cs-slide-gallery__thumb-img" src="<?= $escaper->escapeUrl($image->thumb) ?>" width="<?= $escaper->escapeHtmlAttr($imageSmallWidth) ?>" height="<?= $escaper->escapeHtmlAttr($imageSmallHeight) ?>" alt="<?= $escaper->escapeHtmlAttr($image->caption) ?>" loading="lazy"/>
-                        </li>
+                        </div>
                 <?php endforeach ?>
-            </ul>
+            </div>
 
             <button class="cs-slide-gallery__thumb-nav cs-slide-gallery__thumb-nav--prev" type="button" aria-label="<?= $block->escapeHtmlAttr(__('Previous')) ?>" disabled>
                 <?= $block->getChildHtml('slide.gallery.thumb.button.arrow.prev'); ?>
@@ -144,4 +141,5 @@ $loaderImage = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
         </div>
     </div>
     <div class="load indicator" style="display: none;"></div>
+    <div data-role="focusable-end"></div>
 </div>
