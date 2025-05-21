@@ -39,44 +39,16 @@ $loaderImage = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
     }' data-item-count="<?= $escaper->escapeHtmlAttr(count($galleryImages)) ?>">
     <div data-role="focusable-start"></div>
     <div class="cs-slide-gallery__wrapper">
-        <div class="cs-slide-gallery__slides-wrapper" tabindex="0" role="button">
-        <ul class="cs-slide-gallery__slides">
-            <?php $i = 1; foreach ($galleryImages as $image) : ?>
-                <?php if ($image->type === "video") : ?>
-                    <li class="cs-slide-gallery__slide cs-slide-gallery__slide--video">
-                        <div class="cs-slide-gallery__picture-wrapper">
-                            <picture class="cs-slide-gallery__picture cs-slide-gallery__picture--video">
-                                <div data-video-teaser='{"url": "<?= $escaper->escapeUrl($image->videoUrl) ?>","type": "<?= $escaper->escapeHtml($videoType) ?>"}'>
-                                    <?= /* @noEscape */ $block->getChildHtml("consent_info"); ?>
-                                </div>
-                                <img
-                                    src="<?= /* @noEscape */ $loaderImage ?>"
-                                    data-src="<?= $escaper->escapeUrl($image->img) ?>"
-                                    width="<?= $escaper->escapeHtmlAttr($imageWidth) ?>"
-                                    height="<?= $escaper->escapeHtmlAttr($imageHeight) ?>"
-                                    alt="<?= $escaper->escapeHtmlAttr($image->caption) ?>"
-                                    class="cs-slide-gallery__img lazyload"
-                                >
-                            </picture>
-                        </div>
-                    </li>
-                <?php else : ?>
-                    <li class="cs-slide-gallery__slide">
-                        <div class="cs-slide-gallery__picture-wrapper">
-                            <?php if ($i < 2) : ?>
-                                <picture class="cs-slide-gallery__picture cs-slide-gallery__picture--base">
-                                    <img
-                                        src="<?= $escaper->escapeUrl($image->img) ?>"
-                                        width="<?= $escaper->escapeHtmlAttr($imageWidth) ?>"
-                                        height="<?= $escaper->escapeHtmlAttr($imageHeight) ?>"
-                                        alt="<?= $escaper->escapeHtmlAttr($image->caption) ?>"
-                                        class="cs-slide-gallery__img"
-                                        fetchpriority="high"
-                                        loading="eager"
-                                    >
-                                </picture>
-                            <?php else : ?>
-                                <picture class="cs-slide-gallery__picture cs-slide-gallery__picture--base">
+        <div class="cs-slide-gallery__slides-wrapper">
+            <ul class="cs-slide-gallery__slides" role="list" tabindex="0">
+                <?php $i = 1; foreach ($galleryImages as $image) : ?>
+                    <?php if ($image->type === "video") : ?>
+                        <li class="cs-slide-gallery__slide cs-slide-gallery__slide--video">
+                            <div class="cs-slide-gallery__picture-wrapper">
+                                <picture class="cs-slide-gallery__picture cs-slide-gallery__picture--video">
+                                    <div data-video-teaser='{"url": "<?= $escaper->escapeUrl($image->videoUrl) ?>","type": "<?= $escaper->escapeHtml($videoType) ?>"}'>
+                                        <?= /* @noEscape */ $block->getChildHtml("consent_info"); ?>
+                                    </div>
                                     <img
                                         src="<?= /* @noEscape */ $loaderImage ?>"
                                         data-src="<?= $escaper->escapeUrl($image->img) ?>"
@@ -86,23 +58,51 @@ $loaderImage = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
                                         class="cs-slide-gallery__img lazyload"
                                     >
                                 </picture>
-                            <?php endif; ?>
+                            </div>
+                        </li>
+                    <?php else : ?>
+                        <li class="cs-slide-gallery__slide">
+                            <div class="cs-slide-gallery__picture-wrapper">
+                                <?php if ($i < 2) : ?>
+                                    <picture class="cs-slide-gallery__picture cs-slide-gallery__picture--base">
+                                        <img
+                                            src="<?= $escaper->escapeUrl($image->img) ?>"
+                                            width="<?= $escaper->escapeHtmlAttr($imageWidth) ?>"
+                                            height="<?= $escaper->escapeHtmlAttr($imageHeight) ?>"
+                                            alt="<?= $escaper->escapeHtmlAttr($image->caption) ?>"
+                                            class="cs-slide-gallery__img"
+                                            fetchpriority="high"
+                                            loading="eager"
+                                        >
+                                    </picture>
+                                <?php else : ?>
+                                    <picture class="cs-slide-gallery__picture cs-slide-gallery__picture--base">
+                                        <img
+                                            src="<?= /* @noEscape */ $loaderImage ?>"
+                                            data-src="<?= $escaper->escapeUrl($image->img) ?>"
+                                            width="<?= $escaper->escapeHtmlAttr($imageWidth) ?>"
+                                            height="<?= $escaper->escapeHtmlAttr($imageHeight) ?>"
+                                            alt="<?= $escaper->escapeHtmlAttr($image->caption) ?>"
+                                            class="cs-slide-gallery__img lazyload"
+                                        >
+                                    </picture>
+                                <?php endif; ?>
 
-                            <picture class="cs-slide-gallery__picture cs-slide-gallery__picture--full">
-                            <img
-                                src="<?= /* @noEscape */ $loaderImage ?>"
-                                data-src="<?= $escaper->escapeUrl($image->full) ?>"
-                                width="<?= $escaper->escapeHtmlAttr($imageFullWidth) ?>"
-                                height="<?= $escaper->escapeHtmlAttr($imageFullHeight) ?>"
-                                alt="<?= $escaper->escapeHtmlAttr($image->caption) ?>"
-                                class="cs-slide-gallery__img"
-                            >
-                        </picture>
-                        </div>
-                    </li>
-                <?php endif; ?>
-            <?php $i++; endforeach ?>
-        </ul>
+                                <picture class="cs-slide-gallery__picture cs-slide-gallery__picture--full">
+                                <img
+                                    src="<?= /* @noEscape */ $loaderImage ?>"
+                                    data-src="<?= $escaper->escapeUrl($image->full) ?>"
+                                    width="<?= $escaper->escapeHtmlAttr($imageFullWidth) ?>"
+                                    height="<?= $escaper->escapeHtmlAttr($imageFullHeight) ?>"
+                                    alt="<?= $escaper->escapeHtmlAttr($image->caption) ?>"
+                                    class="cs-slide-gallery__img"
+                                >
+                            </picture>
+                            </div>
+                        </li>
+                    <?php endif; ?>
+                <?php $i++; endforeach ?>
+            </ul>
         </div>
 
         <div class="cs-slide-gallery__actions">
